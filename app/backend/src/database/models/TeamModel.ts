@@ -1,28 +1,28 @@
-import { Model, INTEGER, STRING } from "sequelize";
+import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
 export interface AttributesInterface {
-  id: number; 
-  teamName: string
+  id: number;
+  teamName: string;
 }
 
 class TeamModel extends Model<AttributesInterface> {
   declare id: number;
-  declare teamName: string
+  declare teamName: string;
 }
 
 TeamModel.init({
   id: {
     autoIncrement: true,
-    primaryKey:true,
+    primaryKey: true,
     type: INTEGER,
   },
   teamName: {
-    allowNull:false,
+    allowNull: false,
     type: STRING,
-  }
+  },
 }, {
-  tableName: "teams",
+  tableName: 'teams',
   sequelize: db,
   underscored: true,
   timestamps: false,
