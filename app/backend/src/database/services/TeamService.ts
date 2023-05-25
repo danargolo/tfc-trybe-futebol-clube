@@ -1,9 +1,10 @@
-import TeamModel, {AttributesInterface} from '../models/TeamModel';
+import TeamModel, { AttributesInterface } from '../models/TeamModel';
 
 class teamService {
   public static async getAll(): Promise<AttributesInterface[]> {
-    return await TeamModel.findAll()
+    const response = await TeamModel.findAll();
+    return response;
   }
-}; 
+}
 
 export default teamService;
