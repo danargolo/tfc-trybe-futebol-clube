@@ -6,7 +6,7 @@ export interface AttributesInterface {
   teamName: string;
 }
 
-class TeamModel extends Model<AttributesInterface> {
+class TeamModel extends Model<AttributesInterface > {
   declare id: number;
   declare teamName: string;
 }

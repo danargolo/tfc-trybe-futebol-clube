@@ -7,6 +7,17 @@ class teamController {
 
     return res.status(200).json(response);
   }
+
+  public static async getById(req: Request, res: Response) {
+    const { id } = req.params;
+    const response = await teamService.getById(+id);
+
+    if (!response) {
+      return res.status(404).json({message:"Time não encontrado"})
+    }
+
+    return res.status(200).json(response);
+  }
 }
 
 export default teamController;
