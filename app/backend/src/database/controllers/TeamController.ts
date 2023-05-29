@@ -13,7 +13,7 @@ class teamController {
     const response = await teamService.getById(+id);
 
     if (!response) {
-      return res.status(404).json({message:"Time não encontrado"})
+      return res.status(404).json({ message: 'Time não encontrado' });
     }
 
     return res.status(200).json(response);
