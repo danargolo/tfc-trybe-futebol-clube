@@ -1,4 +1,4 @@
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'insecure';
 
@@ -8,4 +8,14 @@ const generateToken = (email: string): string => {
   return token;
 };
 
-export default generateToken;
+const verifyToken = (token: string) => {
+  try {
+    const isValid = verify(token, JWT_SECRET);
+
+    return isValid;
+  } catch (error) {
+    return null;
+  }
+};
+
+export { generateToken, verifyToken };
