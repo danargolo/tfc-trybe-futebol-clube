@@ -2,7 +2,6 @@ import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import TeamModel from './TeamModel';
 
-
 export interface matchesInterface {
   id?: number;
   homeTeamId: number,

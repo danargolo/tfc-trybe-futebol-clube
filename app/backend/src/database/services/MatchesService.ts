@@ -1,4 +1,3 @@
-
 import MatchesModel, { matchesInterface } from '../models/MatchesModel';
 import TeamModel from '../models/TeamModel';
 import teamService from './TeamService';
@@ -39,7 +38,6 @@ class MatchesService {
 
   public static async updateProgress(id: string): Promise<UpdateProgressResponse> {
     await MatchesModel.update({ inProgress: false }, { where: { id } });
-  
 
     return { message: 'Finished' };
   }
