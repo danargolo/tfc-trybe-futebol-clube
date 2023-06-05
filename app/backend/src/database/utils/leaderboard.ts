@@ -74,7 +74,7 @@ class Leaderboard {
     };
   }
 
-  public filteredMatches(match: matchesInterface[], id:number) {
+  public filteredMatches(match:matchesInterface[], id:number) {
     this.totalGames = match.length;
     match.forEach((m:matchesInterface) => {
       if (id === m.homeTeamId) {
