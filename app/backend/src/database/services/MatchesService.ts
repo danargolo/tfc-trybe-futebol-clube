@@ -5,6 +5,11 @@ interface UpdateProgressResponse {
   message: string;
 }
 
+interface Match {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
 class MatchesService {
   public static async getAll(query: string | undefined): Promise<AttributesInterface[]> {
     let result = await MatchesModel.findAll({
@@ -26,6 +31,20 @@ class MatchesService {
     await MatchesModel.update({ inProgress: false }, { where: { id } });
 
     return { message: 'Finished' };
+  }
+
+  public static async updateMatch(id: string, data: Match): Promise<UpdateProgressResponse> {
+    const homeGoals = data.homeTeamGoals;
+    const awayGoals = data.awayTeamGoals;
+
+    console.log(homeGoals, awayGoals, 'gols');
+
+    await MatchesModel.update({
+      homeTeamGoals: homeGoals,
+      awayTeamGoals: awayGoals,
+    }, { where: { id } });
+
+    return { message: 'Updated' };
   }
 }
 
