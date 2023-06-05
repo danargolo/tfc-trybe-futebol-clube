@@ -10,6 +10,14 @@ interface Match {
   awayTeamGoals: number;
 }
 
+interface MatchRequest {
+  homeTeamId: number;
+  awayTeamId: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+
+}
+
 class MatchesService {
   public static async getAll(query: string | undefined): Promise<AttributesInterface[]> {
     let result = await MatchesModel.findAll({
@@ -45,6 +53,16 @@ class MatchesService {
     }, { where: { id } });
 
     return { message: 'Updated' };
+  }
+
+  public static async createMatch(data: MatchRequest) {
+    const newMatch = {
+      ...data,
+      inProgress: true,
+    };
+
+    const resp = await MatchesModel.create(newMatch);
+    return resp;
   }
 }
 

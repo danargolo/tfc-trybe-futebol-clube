@@ -5,6 +5,7 @@ import validateToken from '../middlewares/validateToken';
 const MatchesRouter = Router();
 
 MatchesRouter
+  .post('/', validateToken.check, MatchesController.createMatch)
   .patch('/:id/finish', validateToken.check, MatchesController.updateProgress)
   .patch('/:id', validateToken.check, MatchesController.updateMatch)
   .get('/', MatchesController.getAll);
