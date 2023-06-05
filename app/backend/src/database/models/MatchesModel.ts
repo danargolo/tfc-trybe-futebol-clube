@@ -2,7 +2,9 @@ import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import TeamModel from './TeamModel';
 
-export interface AttributesInterface {
+
+export interface matchesInterface {
+  id?: number;
   homeTeamId: number,
   homeTeamGoals: number,
   awayTeamId: number,
@@ -10,7 +12,7 @@ export interface AttributesInterface {
   inProgress: boolean
 }
 
-class MatchesModel extends Model<AttributesInterface > {
+class MatchesModel extends Model<matchesInterface > {
   declare homeTeamId: number;
   declare homeTeamGoals: number;
   declare awayTeamId: number;

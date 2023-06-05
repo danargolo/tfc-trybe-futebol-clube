@@ -1,4 +1,5 @@
-import MatchesModel, { AttributesInterface } from '../models/MatchesModel';
+
+import MatchesModel, { matchesInterface } from '../models/MatchesModel';
 import TeamModel from '../models/TeamModel';
 import teamService from './TeamService';
 
@@ -20,7 +21,7 @@ interface MatchRequest {
 }
 
 class MatchesService {
-  public static async getAll(query: string | undefined): Promise<AttributesInterface[]> {
+  public static async getAll(query: string | undefined): Promise<matchesInterface[]> {
     let result = await MatchesModel.findAll({
       include: [
         { model: TeamModel, as: 'homeTeam', attributes: ['teamName'] },
@@ -38,6 +39,7 @@ class MatchesService {
 
   public static async updateProgress(id: string): Promise<UpdateProgressResponse> {
     await MatchesModel.update({ inProgress: false }, { where: { id } });
+  
 
     return { message: 'Finished' };
   }

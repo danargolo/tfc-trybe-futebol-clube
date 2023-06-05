@@ -1,4 +1,5 @@
 import { AttributesInterface } from '../models/TeamModel';
+import { matchesInterface } from '../models/MatchesModel';
 
 interface leaderboard {
   name: string;
@@ -73,9 +74,9 @@ class Leaderboard {
     };
   }
 
-  public filteredMatches(match:any, id:number) {
+  public filteredMatches(match: matchesInterface[], id:number) {
     this.totalGames = match.length;
-    match.forEach((m) => {
+    match.forEach((m:matchesInterface) => {
       if (id === m.homeTeamId) {
         this.points(m.homeTeamGoals, m.awayTeamGoals);
       } else {

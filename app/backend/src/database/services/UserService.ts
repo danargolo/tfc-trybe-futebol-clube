@@ -1,6 +1,7 @@
 import { compare } from 'bcryptjs';
 import UsersModel from '../models/UsersModel';
 import { generateToken, verifyToken } from '../utils/auth';
+import { JwtPayload } from 'jsonwebtoken';
 
 class UsersService {
   public static async checkUser(email:string, password:string): Promise<null | string> {
@@ -20,11 +21,16 @@ class UsersService {
   }
 
   public static async getRole(authorization: string): Promise<string> {
-    const { email } = verifyToken(authorization);
+    const decodedToken = verifyToken(authorization) as JwtPayload;
 
+    const email = decodedToken.email;
+
+   
     const user = await UsersModel.findOne({ where: { email } });
 
-    return user?.role;
+    const role = user?.role ?? 'default-role';
+
+    return role;
   }
 }
 
