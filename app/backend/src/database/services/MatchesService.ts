@@ -1,6 +1,10 @@
 import MatchesModel, { AttributesInterface } from '../models/MatchesModel';
 import TeamModel from '../models/TeamModel';
 
+interface UpdateProgressResponse {
+  message: string;
+}
+
 class MatchesService {
   public static async getAll(query: string | undefined): Promise<AttributesInterface[]> {
     let result = await MatchesModel.findAll({
@@ -16,6 +20,12 @@ class MatchesService {
     }
 
     return result;
+  }
+
+  public static async updateProgress(id: string): Promise<UpdateProgressResponse> {
+    await MatchesModel.update({ inProgress: false }, { where: { id } });
+
+    return { message: 'Finished' };
   }
 }
 

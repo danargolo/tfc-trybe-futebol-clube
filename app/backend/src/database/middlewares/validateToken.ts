@@ -11,7 +11,6 @@ class validateToken {
     }
 
     const token = verifyToken(authorization);
-    // console.log(token, "token middlewares");
 
     if (!token) {
       throw new HttpException(401, 'Token must be a valid token');
