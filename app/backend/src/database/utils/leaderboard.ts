@@ -73,19 +73,39 @@ class Leaderboard {
     };
   }
 
-  public filteredMatches(match:any) {
+  public filteredMatches(match:any, str:string) {
     this.totalGames = match.length;
-    match.forEach((m) => this.points(m.homeTeamGoals, m.awayTeamGoals));
+
+    // if (str === 'home') {
+    //   match.forEach((m) => this.points(m.homeTeamGoals, m.awayTeamGoals));
+    // }
+    if (str === 'away') {
+      match.forEach((m) => this.points(m.awayTeamGoals, m.homeTeamGoals));
+    } else {
+      match.forEach((m) => this.points(m.homeTeamGoals, m.awayTeamGoals));
+    }
     this.calcEfficiency();
 
     return this.table();
   }
 }
 
-export default function board(teams:AttributesInterface[], matches: any): leaderboard[] {
+export default function board(
+  teams:AttributesInterface[],
+  matches: any,
+  str: string,
+): leaderboard[] {
   const data = teams.map((team) => {
     const result = new Leaderboard(team.teamName);
-    return result.filteredMatches(matches.filter((match:any) => match.homeTeamId === team.id));
+    if (str === 'home') {
+      return result
+        .filteredMatches(matches.filter((match:any) => match.homeTeamId === team.id), str);
+    }
+    if (str === 'away') {
+      return result
+        .filteredMatches(matches.filter((match:any) => match.awayTeamId === team.id), str);
+    }
+    return result;
   });
 
   return data;

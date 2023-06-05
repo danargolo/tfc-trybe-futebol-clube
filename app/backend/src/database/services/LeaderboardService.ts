@@ -3,11 +3,11 @@ import MatchesService from './MatchesService';
 import teamService from './TeamService';
 
 class LeaderboardService {
-  public static async createLeaderboard() {
+  public static async createLeaderboard(str: string) {
     const teams = await teamService.getAll();
     const matches = await MatchesService.getAll('false');
 
-    const data = board(teams, matches);
+    const data = board(teams, matches, str);
 
     return data
       .sort((a, b) => b.goalsFavor - a.goalsFavor)

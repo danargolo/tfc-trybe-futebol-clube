@@ -5,7 +5,6 @@ import { generateToken, verifyToken } from '../utils/auth';
 class UsersService {
   public static async checkUser(email:string, password:string): Promise<null | string> {
     const user = await UsersModel.findOne({ where: { email } });
-    console.log(user);
 
     if (!user) {
       return null;
@@ -22,8 +21,6 @@ class UsersService {
 
   public static async getRole(authorization: string): Promise<string> {
     const { email } = verifyToken(authorization);
-
-    // console.log(email , "email");
 
     const user = await UsersModel.findOne({ where: { email } });
 
