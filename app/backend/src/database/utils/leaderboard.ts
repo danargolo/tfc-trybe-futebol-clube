@@ -49,9 +49,9 @@ class Leaderboard {
       this.totalLosses += 1;
     }
 
-    this.goalsOwn += home;
-    this.goalsFavor += away;
-    this.goalsBalance = this.goalsOwn - this.goalsFavor;
+    this.goalsFavor += home;
+    this.goalsOwn += away;
+    this.goalsBalance = this.goalsFavor - this.goalsOwn;
   }
 
   private calcEfficiency(): void {

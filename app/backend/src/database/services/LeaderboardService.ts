@@ -9,7 +9,10 @@ class LeaderboardService {
 
     const data = board(teams, matches);
 
-    return data;
+    return data
+      .sort((a, b) => b.goalsFavor - a.goalsFavor)
+      .sort((a, b) => b.goalsBalance - a.goalsBalance)
+      .sort((a, b) => b.totalPoints - a.totalPoints);
   }
 }
 
