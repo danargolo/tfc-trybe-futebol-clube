@@ -50,6 +50,12 @@ class MatchesController {
 
     res.status(201).json(response);
   }
+
+  public static async createLeaderboard(req: Request, res: Response) {
+    const response = await MatchesService.createLeaderboard();
+
+    res.status(201).json(response);
+  }
 }
 
 export default MatchesController;

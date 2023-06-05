@@ -1,5 +1,6 @@
 import MatchesModel, { AttributesInterface } from '../models/MatchesModel';
 import TeamModel from '../models/TeamModel';
+import teamService from './TeamService';
 
 interface UpdateProgressResponse {
   message: string;
@@ -63,6 +64,12 @@ class MatchesService {
 
     const resp = await MatchesModel.create(newMatch);
     return resp;
+  }
+
+  public static async createLeaderboard() {
+    const teams = await teamService.getAll();
+
+    return teams;
   }
 }
 
