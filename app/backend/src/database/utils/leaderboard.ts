@@ -73,17 +73,15 @@ class Leaderboard {
     };
   }
 
-  public filteredMatches(match:any, str:string) {
+  public filteredMatches(match:any, id:number) {
     this.totalGames = match.length;
-
-    // if (str === 'home') {
-    //   match.forEach((m) => this.points(m.homeTeamGoals, m.awayTeamGoals));
-    // }
-    if (str === 'away') {
-      match.forEach((m) => this.points(m.awayTeamGoals, m.homeTeamGoals));
-    } else {
-      match.forEach((m) => this.points(m.homeTeamGoals, m.awayTeamGoals));
-    }
+    match.forEach((m) => {
+      if (id === m.homeTeamId) {
+        this.points(m.homeTeamGoals, m.awayTeamGoals);
+      } else {
+        this.points(m.awayTeamGoals, m.homeTeamGoals);
+      }
+    });
     this.calcEfficiency();
 
     return this.table();
@@ -95,18 +93,18 @@ export default function board(
   matches: any,
   str: string,
 ): leaderboard[] {
-  const data = teams.map((team) => {
-    const result = new Leaderboard(team.teamName);
+  const data = teams.map((t) => {
+    const result = new Leaderboard(t.teamName);
     if (str === 'home') {
       return result
-        .filteredMatches(matches.filter((match:any) => match.homeTeamId === team.id), str);
+        .filteredMatches(matches.filter((match:any) => match.homeTeamId === t.id), t.id);
     }
     if (str === 'away') {
       return result
-        .filteredMatches(matches.filter((match:any) => match.awayTeamId === team.id), str);
+        .filteredMatches(matches.filter((match:any) => match.awayTeamId === t.id), t.id);
     }
-    return result;
+    return result.filteredMatches(matches
+      .filter((match:any) => match.homeTeamId === t.id || match.awayTeamId === t.id), t.id);
   });
-
   return data;
 }
